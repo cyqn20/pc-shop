@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/new_file.css" />
+</head>
+
+<body>
+    <div id="part">
+        <div class="partCon">
+            <div class="banner">
+                <a href="javascript:void(0)" class="prev"></a>
+                <a href="javascript:void(0)" class="next"></a>
+                <div class="scroll">
+                    <img class="first" src="img/flash1.jpg" />
+                    <img src="img/flash2.jpg" />
+                    <img src="img/flash3.jpg" />
+                    <img src="img/flash4.jpg" />
+                    <img src="img/flash5.png" />
+                    <img src="img/flash6.jpg" />
+                </div>
+                <div class="btn">
+                    <span class="hover"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+      $(function(){
+      	var $imgs=$('.scroll').children('img');
+      	var $btns=$('.btn').children('span');
+      	var $index=0;
+      	var $preindex=0;
+      	$btns.on('click',function(){
+      		$index=$(this).index('span');
+      		lunbo($index);
+      		$preindex=$index;
+      	})
+      	
+      	function lunbo($index){
+      		$btns.eq($index).addClass('hover').siblings('span').removeClass('hover');
+      		if($index>$preindex){//从右边滑出
+      			if($index==5 && $preindex==0){
+//    				alert(1);
+                    $imgs.eq($preindex).animate({
+                    	left:-820,
+                    })
+      				$imgs.eq(5).css('left','820px').animate({
+      					left:0,
+      				})
+      			}else{
+      				$imgs.eq($preindex).animate({
+      				left:-820,
+	      			})
+	      			$imgs.eq($index).css('left','820px').animate({
+	      				left:0,
+	      			})
+      			}
+      			
+      			
+      		}else if($index<$preindex){//从左边滑出
+      			if($index==0 && $preindex==5){
+      				$imgs.eq($preindex).animate({
+      				left:820,
+      			   })
+      				$imgs.eq(0).css('left','-820px').animate({
+      					left:0,
+      				})
+      			}else{
+      				$imgs.eq($preindex).animate({
+      				left:820,
+	      			})
+	      			$imgs.eq($index).css('left','-820px').animate({
+	      				left:0,
+	      			})
+      			}
+      			
+      		}
+      	}
+     
+      	$('.partCon').hover(function(){
+      		$('.prev').show();
+      		$('.next').show();
+      	},function(){
+      		$('.prev').hide();
+      		$('.next').hide();
+      	});
+      	
+      	
+      	$('.prev').on('click',function(){
+      		$index--;
+      		if($index<=-1){
+      			$index=5;
+      		}
+      		lunbo($index);
+//    		alert($index);
+      		$preindex=$index;
+      	})
+      	$('.next').on('click',function(){
+      		$index++;
+      		if($index>=6){
+      			$index=0;
+      		}
+      		lunbo($index);
+//    		alert($index);
+      		$preindex=$index;
+      	})
+      	
+      });
+    </script>
+</body>
+
+</html>
+)

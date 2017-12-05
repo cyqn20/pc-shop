@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			ul,
+			ol {
+				list-style: none;
+			}
+			
+			a {
+				text-decoration: none;
+				;
+			}
+			
+			.jd {
+				width: 790px;
+				height: 340px;
+				position: relative;
+				border: 1px solid red;
+				margin: 0 auto;
+			}
+			
+			.jd ul li {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				opacity: 0;
+				transition: all .5s;
+			}
+			
+			.jd li img {
+				width: 790px;
+				height: 340px;
+				display: block;
+			}
+			
+			#left,
+			#right {
+				position: absolute;
+				font-size: 20px;
+				width: 30px;
+				height: 60px;
+				text-align: center;
+				line-height: 60px;
+				top: 50%;
+				margin-top: -30px;
+				background: rgba(0, 0, 0, .3);
+				color: #fff;
+				display: none;
+			}
+			
+			#left:hover,
+			#right:hover {
+				background: rgba(0, 0, 0, .6);
+			}
+			
+			#left {
+				left: 0;
+			}
+			
+			#right {
+				right: 0;
+			}
+			
+			.jd ol {
+				width: 180px;
+				height: 12px;
+				position: absolute;
+				left: 50%;
+				margin-left: -91px;
+				bottom: 20px;
+				background: rgba(0, 0, 0, 0.2);
+				border-radius: 10px;
+				padding: 4px 8px;
+			}
+			
+			.jd ol li {
+				float: left;
+				width: 12px;
+				height: 12px;
+				background: #fff;
+				border-radius: 50%;
+				margin: 0 5px;
+				text-indent: -99999px;
+			}
+			
+			.jd ol li.active {
+				background: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="jd">
+			<ul>
+				<li style="opacity: 1;"><img src="https://img13.360buyimg.com/da/jfs/t6082/203/6664294051/215517/327addf9/5975963dN3cf75702.jpg" alt="" /></li>
+				<li><img src="https://img1.360buyimg.com/da/jfs/t6838/58/1188598350/101456/93ca512d/597e7d28N65750c3d.jpg" alt="" /></li>
+				<li><img src="https://img12.360buyimg.com/da/jfs/t5614/73/8258277091/129172/cd6b7ea5/59793d03N8173f093.jpg" alt="" /></li>
+				<li><img src="https://img11.360buyimg.com/da/jfs/t5974/7/7659601095/96078/ebcc6ea6/597fd5c0N8d058ee1.jpg" alt="" /></li>
+				<li><img src="https://img12.360buyimg.com/da/jfs/t5839/154/8380421091/51117/6f3d50fb/5979ad9dN277885bf.jpg" alt="" /></li>
+				<li><img src="https://img20.360buyimg.com/da/jfs/t5797/342/6911752397/143313/c4e3730e/59814aa5N8923f6ca.jpg" alt="" /></li>
+				<li><img src="https://img20.360buyimg.com/da/jfs/t6982/302/1164609728/108948/2dcb5835/597ea143N19d4437d.jpg" alt="" /></li>
+				<li><img src="https://img11.360buyimg.com/babel/jfs/t6886/165/1330183705/71170/e069d1e5/59802506N0c042758.jpg" alt="" /></li>
+			</ul>
+			<ol>
+				<li class="active" title="0">1</li>
+				<li title="1">1</li>
+				<li title="2">1</li>
+				<li title="3">1</li>
+				<li title="4">1</li>
+				<li title="5">1</li>
+				<li title="6">1</li>
+				<li title="7">1</li>
+			</ol>
+			<div id="te">
+				<a href="javascript:;" id="left">&lt;</a>
+				<a href="javascript:;" id="right">&gt;</a>
+			</div>
+		</div>
+		</div>
+		<script src="jquery.js"></script>
+		<script type="text/javascript">
+			var $num = 0;
+			$('.jd').on('mouseover', function() {
+				$('#left').show();
+				$('#right').show();
+			})
+			$('.jd').on('mouseout', function() {
+				$('#left').hide();
+				$('#right').hide();
+			})
+			$('ol li').on('click', function() {
+				$num = $(this).index();
+				lunbo();
+			})
+
+			function lunbo() {
+				$('ol li').removeClass('active');
+				$('ol li').eq($num).addClass('active');
+				$('.jd ul li').eq($num).stop(true,true).animate({
+					'opacity': 1
+				}, 200).siblings('li').stop(true,true).animate({
+					'opacity': 0
+				}, 200)
+			}
+
+			$('#left').on('click', function() {
+				$num--;
+				if($num < 0) {
+					$num = 7;
+				}
+				lunbo();
+			})
+			$('#right').on('click', function() {
+				$num++;
+				if($num > 7) {
+					$num = 0;
+				}
+				lunbo();
+			})
+		</script>
+	</body>
+
+</html>

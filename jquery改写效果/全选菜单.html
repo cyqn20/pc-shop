@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type='checkbox' class='zong'/><br/>
+		<input type='checkbox'/>1<br/>
+	    <input type='checkbox'/>2<br/>
+	    <input type='checkbox'/>3<br/>
+	    <input type='checkbox'/>4<br/>
+	    <input type='checkbox'/>5<br/>
+		<script type="text/javascript" src="jquery-1.11.3.js">
+			
+		</script>
+		<script type="text/javascript">
+			$('.zong').change(function(){
+				if($(this).prop('checked')){
+					$('input').prop('checked',true);
+				}else{
+					$('input').prop('checked',false);
+				}
+			})
+			
+			var len=$('input').not($('.zong')).size();
+			$('input').not($('.zong')).click(function(){
+                //console.log(len);
+			    if($('input:checked').not($('.zong')).size()<len){
+			    	$('.zong').prop('checked',false);
+			    }else{
+			    	$('.zong').prop('checked',true);
+			    }
+			})
+		</script>
+		
+	</body>
+</html>

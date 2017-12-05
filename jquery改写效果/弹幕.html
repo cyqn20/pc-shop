@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding: 0;}
+			body{
+			  overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script>
+			var clientwidth=$('html,body').width();
+			var clientheight=$(document).height();
+			console.log(clientwidth);
+			console.log(clientheight);//可视区获取的高度一直为0;
+			var arr=['蛇精脸','恶毒的女人','mdzz','。。。。','不知道说什么好','胡歌超级帅','真的好喜欢','大神评论']
+			function randomtop(){
+				return Math.round(Math.random()*clientheight);
+			}
+			var timer=setInterval(function(){
+				for(var i=0;i<Math.floor(Math.random()*20);i++){
+					var rtop=randomtop();
+					var $cp=$('<p></p>').text(arr[Math.round(Math.random()*arr.length)]).css({
+						'position':'absolute',
+						'left':clientwidth,
+						'top':rtop,
+						'padding':'6px',
+						'width':'500px'
+					})
+					$('body').append($cp);
+				    $('p').animate({
+					    'left':-$(this).width(),
+					    'top':rtop
+				    },15000,'linear',function(){
+					     $(this).remove();
+				    })
+		    	}
+			},3000)
+		    
+		</script>
+	</body>
+</html>
